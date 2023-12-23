@@ -1,0 +1,142 @@
+// Selection Sort
+
+void selectionSort(vector<int>&arr) {
+    // Write your code here.
+    int n=arr.size();
+    int index=0;
+    if(n-1==index){
+        return;
+    }
+    int mini=0;
+    for(int i=index+1;i<n;i++){
+        if(arr[i]<arr[mini]){
+            swap(arr[i],arr[mini]);
+        }
+    }
+    selectionSort(arr);
+}
+
+// Bubble Sort
+
+
+public class Solution {
+    public static void bubbleSort(int[] arr, int n) {
+        //Your code goes here
+        if(n==1 || n==0){
+            return;
+        }
+        for(int i=0;i<n-1;i++){
+            if(arr[i]>arr[i+1]){
+                int temp=arr[i];
+                arr[i]=arr[i+1];
+                arr[i+1]=temp;
+            }
+        }
+        bubbleSort(arr, n-1);
+    }
+}
+
+
+// Insertion Sort
+
+void insertionSort(int arr[], int n)
+{
+    //write your code here
+    for(int i=1;i<n;i++){
+        int last=arr[i];
+        int j=i-1;
+
+        while (j >= 0 && arr[j] > last) {
+          arr[j + 1] = arr[j];
+          j--;
+        }
+        arr[j + 1] = last;
+    }
+}
+
+
+// Merge Sort
+
+public class Solution {
+public static void merge(int arr[], int l ,int mid, int r){
+    int num1=mid-l+1;//no. of elem in Left Sub Array
+    int num2=r-mid;//no. of elem in Right Sub Array
+   
+    int []left=new int[num1];
+    int  []right = new int[num2];
+    for(int i=0;i<num1;i++){
+        left[i]=arr[i+l];
+    }
+      for(int i=0;i<num2;i++){
+        right[i]=arr[i+mid+1];
+    }
+     int i=0, j=0;
+    int k=l;  //v imp
+    while(i<num1 && j<num2){
+        if(left[i]<=right[j]){
+            arr[k]=left[i];
+            k++; i++;
+        }
+        else{
+            arr[k]=right[j];
+            j++; k++;
+        }
+    }
+    while(i<num1){
+        arr[k]=left[i];
+        i++;
+        k++;
+    }
+    while(j<num2){
+        arr[k]=right[j];
+        j++;
+        k++;
+    }
+}
+
+    public static void mergeSort(int[] arr, int l, int r){
+        // Write your code here
+ if (l < r) {
+        int mid = l + (r-l)/ 2;
+        mergeSort(arr, l, mid);
+        mergeSort(arr, mid+1, r);
+        merge(arr, l, mid, r);
+    }
+}
+}
+
+
+// Quick Sort
+
+/*
+	The function is called with the parameters:
+	quickSort(input, 0, size - 1);
+
+*/
+
+int partitionArray(int input[], int start, int end) {
+	// Write your code here
+	int p=input[start];
+	int i=start;
+	int j=end;
+	while(i<j){
+		while(input[i]<=p && i<=end){ //stop at element > pivot
+			i++;
+		}
+		while(input[j]>p && j>=start){ //stop at element < pivot
+			j--;
+		}
+                if (i < j) {
+                        swap(input[i], input[j]);
+                }
+        }
+swap(input[j], input[start]);
+return j;
+}
+void quickSort(int input[], int start, int end) {
+        if (start < end) {
+		  int p=partitionArray(input,start,end);
+          quickSort(input, start, p - 1);
+          quickSort(input, p + 1, end);
+        }
+}
