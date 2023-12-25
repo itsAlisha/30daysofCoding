@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool check(vector<int>& nums) {
+        vector<int> temps;
+        int n=nums.size();
+        for(int i=1;i<=n;i++)
+        {
+            temps=nums;
+            sort(temps.begin(),temps.end());
+            rotate(temps.begin(),temps.begin()+i,temps.end());
+            if(temps==nums)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+};
