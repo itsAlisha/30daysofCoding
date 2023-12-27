@@ -1,0 +1,194 @@
+// Create tree from Postorder and Inorder :
+//{ Driver Code Starts
+/* program to construct tree using inorder and postorder traversals */
+#include <bits/stdc++.h>
+using namespace std;
+
+/* A binary tree node has data, pointer to left child
+   and a pointer to right child */
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+
+    Node(int x) {
+        data = x;
+        left = right = NULL;
+    }
+};
+
+/* This funtcion is here just to test buildTreeUtil() */
+void preOrder(Node* node) {
+    if (node == NULL) return;
+
+    /* then print the data of node */
+    printf("%d ", node->data);
+
+    /* first recur on left child */
+    preOrder(node->left);
+
+    /* now recur on right child */
+    preOrder(node->right);
+}
+
+Node* buildTree(int in[], int post[], int n);
+
+int main() {
+    int t, n;
+    cin >> t;
+    while (t--) {
+        cin >> n;
+        int in[n], post[n];
+        for (int i = 0; i < n; i++) cin >> in[i];
+        for (int i = 0; i < n; i++) cin >> post[i];
+        Node* root = buildTree(in, post, n);
+        preOrder(root);
+        cout << endl;
+    }
+    return 0;
+}
+
+// } Driver Code Ends
+
+
+/* Tree node structure
+
+struct Node
+{
+    int data;
+    struct Node* left;
+    struct Node* right;
+
+    Node(int x){
+        data = x;
+        left = right = NULL;
+    }
+};*/
+void createmapping(int in[], int start, int end, map<int,int> &m){
+    for(int i=start;i<=end;i++){
+        m[in[i]]=i;
+    }
+}
+Node*solve(int in[], int post[], int n, int &postindex, int instart, int inend, map<int,int>&m){
+    if(postindex<0 || instart>inend){
+        return NULL;
+    }
+    Node* root=new Node(post[postindex--]);
+    if(instart==inend){
+        return root;
+    }
+    int inindex=m[root->data];
+    
+    root->right=solve(in,post,n,postindex,inindex+1,inend,m);
+    root->left=solve(in,post,n,postindex,instart,inindex-1,m);
+    return root;
+    
+}
+//Function to return a tree created from postorder and inoreder traversals.
+Node *buildTree(int in[], int post[], int n) {
+    // Your code here
+    int postindex=n-1;
+    map<int,int>m;
+    createmapping(in,0,n-1,m);
+    Node*ans=solve(in,post,n,postindex,0,n-1,m);
+    return ans;
+}
+//Create Tree from Preorder and Inorder : 
+//{ Driver Code Starts
+//
+
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node
+{
+	int data;
+	struct Node *left;
+	struct Node *right;
+	
+	Node(int x){
+	    data = x;
+	    left = NULL;
+	    right = NULL;
+	}
+};
+
+
+void printPostOrder(Node *root)
+{
+	if(root==NULL)
+		return;
+	printPostOrder(root->left);
+	printPostOrder(root->right);
+	cout<<root->data<<" ";
+}
+
+// } Driver Code Ends
+
+/*Complete the code here.
+Node is as follows:
+struct Node
+{
+  int data;
+  Node* left;
+  Node* right;
+};
+*/
+class Solution{
+    public:
+    int findininorder(int in[],int start, int end, int value){
+        for(int i=start;i<=end;i++){
+            if(value==in[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+    Node* solve(int in[],int pre[], int n, int &preindex, int instart, int inend){
+        if(instart>inend){
+            return NULL;
+        }
+        Node*root=new Node(pre[preindex++]);
+        if(instart==inend){
+            return root;
+        }
+        int index=findininorder(in,instart,inend,root->data); //inorderindex(index)!=preindex but values are same
+        
+        root->left = solve(in,pre,n,preindex,instart,index-1);
+        root->right=solve(in,pre,n,preindex,index+1,inend);// don't specify 0 and n as inorder start and end
+        return root;
+        
+    }
+    Node* buildTree(int in[],int pre[], int n)
+    {
+        // Code here
+        int preindex=0;
+        Node*ans=solve(in,pre,n,preindex,0,n-1);
+        return ans;
+        
+    }
+};
+
+//{ Driver Code Starts.
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		
+		int inorder[n], preorder[n];
+		for(int i=0; i<n; i++)
+			cin>> inorder[i];
+		for(int i=0; i<n; i++)
+			cin>> preorder[i];
+		Solution obj;
+		Node *root = obj.buildTree(inorder, preorder, n);
+		printPostOrder(root);
+		cout<< endl;
+	}
+}
+
+// } Driver Code Ends
