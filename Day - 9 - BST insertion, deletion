@@ -1,0 +1,79 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+
+struct Node
+{
+    int data;
+    Node *left;
+    Node *right;
+    Node(int d)
+    {
+        data = d;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+Node *insertioninBST(Node *root, int d)
+{
+    if (root == NULL)
+    {
+        root = new Node(d);
+        return root;
+    }
+    if (d < root->data)
+    {
+        root->left = insertioninBST(root->left, d);
+    }
+    else
+    {
+        root->right = insertioninBST(root->right, d);
+    }
+    return root;
+}
+void LevelOrderTraversal(Node *root)
+{
+    queue<Node *> q;
+    q.push(root); // First, go to root, push its left and right child, then go to NULL, push NULL at the end of child
+    q.push(NULL);
+    while (!q.empty())
+    {
+        Node *temp = q.front();
+        q.pop();
+        if (temp == NULL)
+        {
+            cout << endl;
+            if (!q.empty())
+            {
+                q.push(NULL);
+            }
+        }
+        else
+        {
+            cout << temp->data << " ";
+            if (temp->left)
+            {
+                q.push(temp->left);
+            }
+            if (temp->right)
+            {
+                q.push(temp->right);
+            }
+        }
+    }
+}
+int main()
+{
+    Node *root = NULL;
+    cout << "Enter data : " << endl;
+    int d;
+    cin >> d;
+    while (d != -1)
+    {
+        root = insertioninBST(root, d);
+        cin >> d;
+    }
+    cout << "Level Order Traversal is : " << endl;
+    LevelOrderTraversal(root);
+}
