@@ -1,0 +1,68 @@
+//Merge teo BSTs
+/*************************************************************
+
+    Following is the Binary Tree node structure:
+
+    class TreeNode
+    {
+    public:
+        int data;
+        TreeNode *left, *right;
+        TreeNode() : data(0), left(NULL), right(NULL) {}
+        TreeNode(int x) : data(x), left(NULL), right(NULL) {}
+        TreeNode(int x, TreeNode *left, TreeNode *right) : data(x), left(left), right(right) {}
+    };
+
+*************************************************************/
+void inorder(TreeNode *root,vector<int>&v){
+    if(root==NULL){
+        return;
+    }
+    inorder(root->left,v);
+    v.push_back(root->data);
+    inorder(root->right,v);
+}
+TreeNode* inordertoBST(vector<int>&v,int low, int high){
+    if (low > high) {
+        return NULL;
+    }
+    int mid = low + (high - low) / 2;
+    TreeNode *newroot = new TreeNode(v[mid]);
+    newroot->left = inordertoBST(v, low, mid - 1);
+    newroot->right = inordertoBST(v, mid + 1, high);
+    return newroot;
+}
+vector<int> mergeBST(TreeNode *root1, TreeNode *root2)
+{
+    // Write your code here.
+    vector<int>v1,v2;
+    
+    inorder(root1,v1);
+    inorder(root2,v2);
+    int m=v1.size();
+    int n=v2.size();
+    vector<int>v3(m+n);
+    //merge two sorted arrays
+    int i=0,j=0,k=0;;
+    while(i<v1.size() &&j<v2.size()){
+        if (v1[i] < v2[j]) {
+          v3[k++]=v1[i];
+          i++;
+        }
+        else {
+         v3[k++]=v2[j];
+          j++;
+        }
+    }
+    while(i<v1.size()){
+         v3[k++]=v1[i];
+          i++;
+    }
+    while(j<v2.size()){
+          v3[k++]=v2[j];
+          j++;
+    }
+    // int s=v3.size();
+    // return inordertoBST(v3,0,s-1);
+    return v3;
+}
