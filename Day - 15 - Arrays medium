@@ -1,4 +1,4 @@
-
+//Q1
 vector<int> nextGreaterPermutation(vector<int> &A) {
     // Write your code here.
     //12|34 1243 1324 1342 1423 1432....
@@ -22,4 +22,33 @@ vector<int> nextGreaterPermutation(vector<int> &A) {
     }
     reverse(A.begin()+index+1,A.end());
     return A;
+}
+
+//Q2.
+int longestSuccessiveElements(vector<int>&nums) {
+    // Write your code here.
+  //  unique(nums.begin(),nums.end());
+        int n=nums.size();
+        int maxcount=1;
+        if(n==0){
+            return 0;
+        }
+        sort(nums.begin(),nums.end());
+       // int diff=1;
+       int count=1;
+        for(int i=1;i<n;i++){
+           if(nums[i]-nums[i-1]==0){
+               continue;
+            }
+            if(nums[i]-nums[i-1]==1){
+                count++;
+              //  continue;
+            }
+            else{
+              count=1;
+            }
+            maxcount=max(maxcount,count);
+        }
+        return maxcount;
+    
 }
