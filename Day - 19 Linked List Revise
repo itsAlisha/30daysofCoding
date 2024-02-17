@@ -1,0 +1,148 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+
+struct Node
+{
+    int data;
+    Node *next;
+    Node(int data)
+    {
+        this->data = data;
+        next = NULL;
+    }
+};
+void printLL(Node *n)
+{
+    Node *temp = n;
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+}
+void InsertatTail(Node *&n, int data)
+{
+    Node *newNode = new Node(data);
+
+    if (n == nullptr)
+    {
+        n = newNode;
+        return;
+    }
+
+    Node *temp = n;
+    while (temp->next != nullptr)
+    {
+        temp = temp->next;
+    }
+
+    temp->next = newNode;
+}
+
+void InsertatHead(Node *&n, Node *head)
+{
+    head->next = n;
+    n = head;
+}
+void Insertattail(Node *&n, Node *tail)
+{
+    Node *temp = n;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    temp->next = tail;
+}
+void Insertatmid(Node *&n, int d, int val)
+{
+    Node *temp = n;
+    while (temp->next->data != val)
+    {
+        temp = temp->next;
+    }
+    Node *newNode = new Node(d);
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+void Insertatmidindex(Node *&head, int d, int index)
+{
+    Node *newNode = new Node(d);
+    Node *temp = head;
+    int cnt = 0;
+    while (cnt != index - 1)
+    {
+        temp = temp->next;
+        cnt++;
+    }
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+void Delathead(Node *&n)
+{
+    Node *temp = n;
+    n = n->next;
+    temp->next = NULL;
+    delete temp;
+}
+void Delattail(Node *&n)
+{
+    Node *temp = n;
+    Node *temp2 = NULL;
+    while (temp->next != NULL)
+    {
+        temp2 = temp;
+        temp = temp->next;
+    }
+    temp2->next = NULL;
+    delete temp;
+}
+void Delatmid(Node *&head, int index)
+{
+    Node *temp = head;
+    int cnt = 0;
+    Node *temp2 = NULL;
+    while (cnt < index)
+    {
+        temp2 = temp;
+        temp = temp->next;
+        cnt++;
+    }
+    temp2->next = temp->next;
+    delete temp;
+}
+int main()
+{
+    Node *n = new Node(5);
+    n->next = new Node(6);
+    n->next->next = new Node(7);
+    n->next->next->next = new Node(10);
+    printLL(n);
+    cout << endl;
+    Node *head = new Node(22);
+    InsertatHead(n, head);
+    printLL(n);
+    cout << endl;
+    InsertatTail(n, 14);
+    printLL(n);
+    cout << endl;
+    Node *tail = new Node(24);
+    Insertattail(n, tail); // my func
+    printLL(n);
+    cout << endl;
+    Insertatmid(n, 11, 7); // my func
+    printLL(n);
+    cout << endl;
+    Delathead(n);
+    printLL(n);
+    cout << endl;
+    Delattail(n);
+    printLL(n);
+    cout << endl;
+    Delatmid(n, 3);
+    printLL(n);
+    cout << endl;
+    Insertatmidindex(n, 7, 3); // my func
+    printLL(n);
+}
+
