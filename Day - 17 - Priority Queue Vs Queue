@@ -1,0 +1,39 @@
+#include <iostream>
+#include <queue>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    // int arr[5] = {6, 5, 9, 8, 7};
+    // sort(arr, arr + 5, greater<int>());
+
+    // pq as min heap
+    priority_queue<string, vector<string>, greater<string>> pq;
+    queue<int> q;
+    pq.push("D");
+    pq.push("C");
+    pq.push("B");
+    pq.push("A");
+    pq.push("E");
+    // 9 >> 8 >> 7 >> 6 >> 5
+    q.push(6);
+    q.push(5);
+    q.push(9);
+    q.push(8);
+    q.push(7);
+
+    while (!pq.empty())
+    {
+        cout << pq.top() << " ";
+        pq.pop();
+    }
+    while (!q.empty())
+    {
+        cout << q.front() << " ";
+        q.pop();
+    }
+    // for (auto i : arr)
+    // {
+    //     cout << i << " ";
+    // }
+}
