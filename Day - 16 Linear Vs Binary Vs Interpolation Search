@@ -1,0 +1,80 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    // Linear Search
+    int k = 7, n = 5;
+    ;
+    int arr[5] = {2, 5, 4, 3, 1};
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] == k)
+        {
+            cout << "Found";
+            break;
+        }
+        if (i == n - 1 && arr[i] != k)
+        {
+            cout << "Not Found";
+        }
+    }
+    // Binary Search
+    int s = 10;
+    int arr2[s] = {1, 2, 3, 4, 5, 16, 17, 18, 45, 50};
+    int start = 0;
+    int end = s - 1;
+    int mid;
+    int key = 5;
+    while (start <= end)
+    {
+        mid = start + (end - start) / 2;
+        if (arr2[mid] == key)
+        {
+            cout << "Found at index : " << mid;
+            break;
+        }
+        else if (arr2[mid] > key)
+        {
+            end = mid - 1;
+        }
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    if (arr2[mid] != key)
+    {
+        cout << "Not Found";
+        //     }
+        // }
+        // interpolation search
+        int num = 10;
+        int arr3[num] = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+        int value = 20;
+        int low = 0;
+        int high = num - 1;
+        int probe;
+        while (value >= arr3[low] && value <= arr3[high] && low <= high)
+        {
+            probe = low + (value - arr3[low]) * (high - low) / (arr3[high] - arr3[low]);
+            cout << probe << endl;
+            if (value == arr3[probe])
+            {
+                cout << "Found at : " << probe;
+                break;
+            }
+            else if (value > arr3[probe])
+            {
+                low = probe + 1;
+            }
+            else
+            {
+                high = probe - 1;
+            }
+        }
+        if (value != arr3[probe])
+        {
+            cout << "Not found";
+        }
+    }
