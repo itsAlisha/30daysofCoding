@@ -1,0 +1,47 @@
+//Stacks
+#include <iostream>
+#include <stack>
+using namespace std;
+int main()
+{
+    stack<string> st;
+    cout << st.empty();
+    st.push("Minecraft");
+    st.push("PS-V");
+    cout << st.size();
+    cout << st.empty();
+    string myfave = st.top();
+    cout << myfave;
+    while (!st.empty())
+    {
+        cout << st.top() << " ";
+        st.pop();
+    }
+    // for (int i = 0; i < 10000000000; i++)
+    // {
+    //     st.push("Hi");
+    // } Don't (or face Stack Overflow :))
+}
+//Queues
+#include <queue>
+#include <iostream>
+using namespace std;
+int main()
+{
+    queue<int> q;
+
+    q.push(5);
+    q.push(7);
+    q.push(9);
+    q.emplace(11);
+    cout << q.empty();
+    cout << q.size();
+    q.pop();
+    int t = q.back();
+    cout << t;
+    while (!q.empty())
+    {
+        cout << q.front();
+        q.pop();
+    }
+}
