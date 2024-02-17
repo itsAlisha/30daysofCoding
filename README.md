@@ -1,2 +1,2 @@
-# 100daysofCoding
-For My DSA notes + codes I will cover in 100 days
+# 30daysofCoding
+For My DSA notes + codes which I will cover in 30 days
