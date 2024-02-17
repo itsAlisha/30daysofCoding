@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    vector<int> p(5);
+    cout << p.size() << endl;
+    cout << p.max_size() << endl;
+    cout << p.capacity() << endl;
+    p.push_back(4);
+    for (auto i : p)
+    {
+        cout << i << " ";
+    }
+    cout << endl
+         << p.size() << endl;
+    p.pop_back();
+    for (auto i : p)
+    {
+        cout << i << " ";
+    }
+    cout << endl
+         << p.capacity() << endl;
+    cout << p.size() << endl;
+    cout << p.max_size() << endl;
+    p[0] = 1;
+    p[1] = 6;
+    p[2] = 7;
+    p[3] = 9;
+    p[4] = 4;
+    for (auto i = p.begin(); i < p.end(); i++)
+    {
+        cout << *i << " ";
+    }
+    cout << endl;
+    cout << p.empty();
+    cout << endl
+         << p.front();
+    cout << endl
+         << p.back();
+    cout << endl
+         << p.at(2);
+    int *pos = p.data();
+
+    cout << "\nThe first element is " << *pos;
+}
