@@ -67,3 +67,49 @@ int main()
     }
 }
 // Code for Quick Sort
+#include <iostream>
+using namespace std;
+
+int partition(int arr[], int low, int high)
+{
+    int j = low, i = low - 1;
+    int pivot = arr[high];
+    while (j <= high)
+    {
+        if (arr[j] < pivot)
+        {
+            i++;
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+        j++;
+    }
+    i++;
+    int temp = arr[i];
+    arr[i] = arr[high];
+    arr[high] = temp;
+    return i;
+}
+void QuickSort(int arr[], int low, int high)
+{
+    if (low > high)
+    {
+        return;
+    }
+    int pivot = partition(arr, low, high);
+    QuickSort(arr, low, pivot - 1);
+    QuickSort(arr, pivot + 1, high);
+}
+
+int main()
+{
+    int n = 10;
+    int arr[n] = {2, 4, 1, 5, 7, 3, 9, 8, 0, 6};
+    int low = 0, high = n - 1;
+    QuickSort(arr, low, high);
+    for (int i : arr)
+    {
+        cout << arr[i] << " ";
+    }
+}
