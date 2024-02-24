@@ -1,0 +1,135 @@
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    // Bubble Sort
+    // int n = 5;
+    // int arr[5] = {2, 4, 6, 3, 1};
+    // for (int i = 0; i < n; i++)
+    // {
+    //     for (int j = 1; j < n; j++)
+    //     {
+    //         if (arr[j - 1] > arr[j])
+    //         {
+    //             int temp = arr[j - 1];
+    //             arr[j - 1] = arr[j];
+    //             arr[j] = temp;
+    //         }
+    //     }
+    // }
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     cout << arr[i];
+    // }
+
+    // best solve j in n-i-1
+    // int n = 5;
+    // int arr[5] = {5, 8, 7, 4, 2};
+    // for (int i = 0; i < n; i++)
+    // {
+    //     for (int j = 0; j < n - i - 1; j++)
+    //     {
+    //         if (arr[j] > arr[j + 1])
+    //         {
+    //             int temp = arr[j];
+    //             arr[j] = arr[j + 1];
+    //             arr[j + 1] = temp;
+    //         }
+    //     }
+    // }
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     cout << arr[i];
+    // }
+    // selection
+    // int n = 5;
+    // int arr[5] = {5, 8, 7, 4, 2};
+    // int min;
+    // int temp;
+    // for (int i = 0; i < n; i++)
+    // {
+    //     min = i;
+    //     for (int j = i + 1; j < n; j++)
+    //     {
+    //         if (arr[j] < arr[min])
+    //         {
+    //             min = j;
+    //         }
+    //     }
+    //     temp = arr[i];
+    //     arr[i] = arr[min];
+    //     arr[min] = temp;
+    // }
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     cout << arr[i];
+    // }
+    // insertion sort
+    int n = 5;
+    int arr[5] = {5, 8, 7, 4, 2};
+    int temp, t;
+    for (int j = 1; j < n; j++)
+    {
+        temp = arr[j];
+        int i = j - 1;
+        while (i >= 0 && arr[i] > temp)
+        {
+            arr[i + 1] = arr[i];
+            i--; // i-- hua isliye i+1;
+        }
+        arr[i + 1] = temp;
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        cout << arr[i];
+    }
+}
+//Code for Insertion Sort
+#include <iostream>
+using namespace std;
+
+int power(int a,int b){
+    if(a==1 || b==0) return 1;
+    if(a==0) return 0;
+    if(b==1) return a;
+    
+    return a*power(a,b-1);
+}
+
+int fact(int n){ 
+    if(n<=1){
+        return 1;
+    }
+    return n*fact(n-1);
+}
+int main()
+{
+    //recursions
+    // fact and power(x,y)
+    //fact(5)
+    
+   int ans= fact(5);
+   cout<<ans<<endl;
+   cout<<power(2,5);
+    cout<<endl;
+    int n=10;
+    int arr[n]={2,4,1,5,7,3,9,8,0,6};
+    for(int i=1;i<n;i++)
+    {
+        int temp=arr[i];
+        int j=i-1;
+        
+        while(j>=0 && arr[j]>temp){
+            arr[j+1]=arr[j];
+            j--;
+        }
+        arr[j+1]=temp;
+    }
+    for(int i :arr){
+        cout<<arr[i]<<" ";
+    }
+
+    return 0;
+}
