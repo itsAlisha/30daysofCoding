@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+
+void merge(int arr[], int low, int mid, int high)
+{
+    int n1 = mid - low + 1, n2 = high - mid;
+    int leftarr[n1];
+    int rightarr[n2];
+    for (int i = 0; i < n1; i++)
+    {
+        leftarr[i] = arr[i + low];
+    }
+    for (int i = 0; i < n2; i++)
+    {
+        rightarr[i] = arr[i + mid + 1];
+    }
+    int i = 0, j = 0, k = low;
+    while (i < n1 && j < n2)
+    {
+        if (leftarr[i] <= rightarr[j])
+        {
+            arr[k] = leftarr[i];
+            k++;
+            i++;
+        }
+        else
+        {
+            arr[k] = rightarr[j];
+            k++;
+            j++;
+        }
+    }
+    while (i < n1)
+    {
+        arr[k] = leftarr[i];
+        k++;
+        i++;
+    }
+    while (j < n2)
+    {
+        arr[k] = rightarr[j];
+        k++;
+        j++;
+    }
+}
+void mergesort(int arr[], int low, int high)
+{
+    if (low < high)
+    {
+        int mid = low + (high - low) / 2;
+        mergesort(arr, low, mid);
+        mergesort(arr, mid + 1, high);
+        merge(arr, low, mid, high);
+    }
+}
+
+int main()
+{
+    int n = 10;
+    int arr[n] = {2, 4, 1, 5, 7, 3, 9, 8, 0, 6};
+    int low = 0;
+    int high = n - 1;
+    mergesort(arr, low, high);
+    for (int i : arr)
+    {
+        cout << arr[i] << " ";
+    }
+}
+// Code for Quick Sort
